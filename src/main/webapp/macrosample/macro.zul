@@ -1,0 +1,53 @@
+<?component name="breadcrumb" macroURI="/WEB-INF/macro/breadcrumb.zul" class="demo.macro.BreadCrumb"?>
+<zk xmlns:n="native">
+	<style>
+	.title {
+		font: 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.2);
+	}
+	.article-title {
+		font: 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+	}
+	</style>
+	<div vflex="1" style="margin: 0 auto; max-width: 960px;">
+		<borderlayout hflex="1" vflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('demo.macro.MacroSampleVM')">
+			<north border="none">
+				<div style="border-bottom: 1px solid #CCCCCC; margin: 10px 0; padding: 5px 0;">
+					<label sclass="title" value="Blog Title" />
+				</div>
+			</north>
+			<east width="280px" border="none" style="border-left: 1px solid #CCCCCC; padding-left: 10px;">
+				<div>
+					<tree model="@bind(vm.menuModel)" style="border: none;">
+						<template name="model" var="aLabel">
+							<treeitem label="@load(aLabel.data.label)" onClick="@command('loadArticle1', node=aLabel)" />
+						</template>
+					</tree>
+				</div>
+			</east>
+			<center autoscroll="true" border="none" style="padding-right: 10px;">
+				<vlayout>
+					<breadcrumb id="breadcrumb" hflex="1" path="@bind(vm.path)" onPathClick="@command('loadArticle1', node=event.data)" />
+					<vlayout visible="@load(vm.articleView)">
+						<label value="@load(vm.article.postDate) @converter('formatedDate', format='EEEE, MMM d, yyyy')" />
+						<label value="@load(vm.article.title)" sclass="article-title" />
+						<html content="@load(vm.article.content)" />
+					</vlayout>
+					<vlayout visible="@load(vm.articlesView)" children="@load(vm.path.data.articles)" spacing="1.5em">
+						<template name="children" var="article">
+							<vlayout>
+								<label value="@load(article.postDate) @converter('formatedDate', format='EEEE, MMM d, yyyy')" />
+								<label value="@load(article.title)" sclass="article-title" />
+								<div>
+									<html content="@load(article.briefContent)" />
+									<separator orient="vertical" spacing="3px" />
+									<a href="" label="[...]" onClick="@command('loadArticle2', node=vm.path, id=article.id)" />
+								</div>
+							</vlayout>
+						</template>
+					</vlayout>
+				</vlayout>
+			</center>
+		</borderlayout>
+	</div>
+</zk>

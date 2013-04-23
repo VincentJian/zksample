@@ -1,0 +1,30 @@
+<zk>
+	<style>
+		.breadcrumb {
+			background-color: #F5F5F5;
+			border-radius: 4px;
+			margin: 0 0 10px;
+			padding: 8px 15px;
+		}
+		.divider {
+			color: #CCCCCC;
+		}
+		.text {
+			text-shadow: 0 1px 0 #FFFFFF;
+			font-size: 14px;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			color: #999999;
+		}
+		a.text {
+			color: #0088CC;
+			text-decoration: none;
+		}
+		a.text:hover,
+		a.text:focus {
+			color: #005580;
+			text-decoration: underline;
+		}
+	</style>
+	<hlayout id="m_hlayout" hflex="1" height="20px" sclass="breadcrumb" spacing="10px">
+	</hlayout>
+</zk>
